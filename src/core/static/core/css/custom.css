@@ -1,0 +1,27 @@
+body {
+    background-color: #fafafa;
+}
+
+.bg-dark-custom {
+    /* background-image: linear-gradient(to right, #0089ab, #07b8c5); */
+    background-image: linear-gradient(to left, var(--blue), var(--cyan));
+    color:white;
+}
+
+.bg-dark-custom-side {
+    background-image: linear-gradient(to bottom, var(--cyan), var(--blue));
+    color:white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+.nav-link:active {
+    color: yellow;
+
+}
