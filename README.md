@@ -16,3 +16,4 @@ pip install -r requirements.txt
 cd into src
 python manage.py runserver
 
+create some participants and create some users associated with those participants
