@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+from .validators import participant_code_not_zero
 
 
 class UserManager(BaseUserManager):
@@ -45,7 +45,7 @@ class UserManager(BaseUserManager):
 
 class Participant(models.Model):
     name = models.CharField(max_length=140)
-    code = models.CharField(max_length=4, unique=True)
+    code = models.CharField(max_length=4, unique=True, validators=[participant_code_not_zero])
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
