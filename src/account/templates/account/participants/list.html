@@ -3,25 +3,29 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
-    <div class="card shadow">
-        <div class="card-header bg-dark-custom">Participants</div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for p in participants %}
-                        <tr>
-                            <td>{{ p.code }}</td>
-                            <td>{{ p.name }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark-custom">Participants</div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in participants %}
+                                <tr>
+                                    <td>{{ p.code }}</td>
+                                    <td>{{ p.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

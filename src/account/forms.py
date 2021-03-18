@@ -5,10 +5,10 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'participant')
+        fields = ('first_name', 'last_name', 'email', 'participant')
 
 class UserEditForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'participant')
+        fields = ('first_name', 'last_name', 'email', 'participant')

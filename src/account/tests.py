@@ -12,23 +12,23 @@ class ParticipantTests(TestCase):
         p = Participant.objects.create(code='0001', name='TCMB')
         self.assertEqual(p.code, '0001')
         self.assertEqual(p.name, 'TCMB')
-        try:
-            with self.assertRaises(ValidationError):
-                Participant.objects.create(
-                    code='0001',
-                    name='Another TCMB')
-        except IntegrityError as e:
-            print(e)
+        with self.assertRaises(IntegrityError):
+            Participant.objects.create(
+                code='0001',
+                name='Another TCMB')
 
         try:
             with self.assertRaises(ValidationError):
-                Participant.objects.create(code='0222aa', name='Test Bankası')
+                Participant.objects.create(code='0222aa', name='Test Bankası').full_clean()
         except transaction.TransactionManagementError as e:
             print(e)
         
+        # TODO: something is wrong here in these tests
         try:
             with self.assertRaises(ValidationError):
-                Participant.objects.create(code='4550', name='Zero Bank')
+                p = Participant(code='0004', name='Zero Bank')
+                p.full_clean()
+                # Participant.objects.create(code='0004', name='Zero Bank').full_clean()
         except transaction.TransactionManagementError as e:
             print(e)
 

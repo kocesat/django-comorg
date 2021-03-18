@@ -73,3 +73,11 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        permissions = [
+            ('can_activate_user', 'Can activate user')
+        ]
+
+    def get_group_names(self):
+        return ', '.join(self.groups.values_list('name', flat=True))
