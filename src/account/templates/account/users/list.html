@@ -7,7 +7,6 @@
     <div class="col">
         <div class="card shadow">
             <div class="card-header bg-dark-custom">Users</div>
-            User: {{ request.user }}
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -33,11 +32,14 @@
                                             <span class="badge badge-pill badge-success">Active</span> 
                                         {% else %} 
                                             <span class="badge badge-pill badge-secondary">Passive</span>  
-                                        {% endif %}</td>
+                                        {% endif %}
+                                    </td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-info">Assign Role</a>
+                                        <a href="#" 
+                                        class="btn btn-sm btn-outline-info ">Assign Role</a>
                                         {% if u.is_active %}
-                                            <a href="{% url 'account:deactivate_user' u.id %}" class="btn btn-sm btn-warning">Deactivate</a>
+                                            <a href="{% url 'account:deactivate_user' u.id %}" 
+                                                class="btn btn-sm btn-warning ">Deactivate</a>
                                         {% else %}
                                             <a href="{% url 'account:activate_user' u.id %}" class="btn btn-sm btn-success">Activate</a>
                                         {% endif %}
