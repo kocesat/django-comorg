@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Broadcast{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% for broadcast in broadcasts %}
+        <div class="card border-light shadow mb-4">
+            <div class="card-header">
+                <strong>{{ broadcast.title }}</strong>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    {{ broadcast.body }}
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    Published at {{ broadcast.published }}
+                </small>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

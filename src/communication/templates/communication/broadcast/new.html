@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Broadcast{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card border-light shadow">
+            <div class="card-header bg-dark-custom">
+                Make a broadcast
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="fieldset">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

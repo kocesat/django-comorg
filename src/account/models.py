@@ -76,7 +76,8 @@ class User(AbstractUser):
 
     class Meta:
         permissions = [
-            ('can_activate_user', 'Can activate user')
+            ('can_activate_user', 'Can activate user'),
+            ('can_assing_role', 'Can assing role'),
         ]
 
     def get_group_names(self):

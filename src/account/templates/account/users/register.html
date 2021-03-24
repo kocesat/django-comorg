@@ -4,19 +4,31 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join Today</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card border-light shadow-lg">
+                <div class="card-header bg-dark-custom">
+                    Fill in the following form to join 
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">Register</legend>
+                            {{ form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Already Have An Account? <a class="ml-2" href="{% url 'account:login' %}">Sign In</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="#">Sign In</a>
-        </small>
     </div>
+
 {% endblock content %}

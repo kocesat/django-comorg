@@ -16,18 +16,17 @@ class ParticipantTests(TestCase):
             Participant.objects.create(
                 code='0001',
                 name='Another TCMB')
-
         try:
             with self.assertRaises(ValidationError):
-                Participant.objects.create(code='0222aa', name='Test Bankası').full_clean()
+                participant = Participant(code='0222aa', name='Test Bankası')
+                participant.full_clean()
         except transaction.TransactionManagementError as e:
             print(e)
-        
         # TODO: something is wrong here in these tests
         try:
             with self.assertRaises(ValidationError):
-                p = Participant(code='0004', name='Zero Bank')
-                p.full_clean()
+                participant = Participant(code='0004', name='Zero Bank')
+                participant.full_clean()
                 # Participant.objects.create(code='0004', name='Zero Bank').full_clean()
         except transaction.TransactionManagementError as e:
             print(e)
@@ -80,5 +79,3 @@ class UserManagersTests(TestCase):
                     is_superuser=False)
         except IntegrityError:
             pass
-
-
