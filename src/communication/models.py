@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -19,8 +20,9 @@ class Broadcast(models.Model):
 
     def publish(self):
         self.is_published = True
+        self.published = timezone.now()
 
-    def unpublished(self):
+    def unpublish(self):
         self.is_published = False 
 
     def __str__(self):
