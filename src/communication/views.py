@@ -24,7 +24,9 @@ def index(request):
 
 @login_required
 def list_unpublished(request):
-    # get only unpublished broadcast
+    """
+    get only unpublished broadcast
+    """
     broadcasts = Broadcast.objects.filter(is_published=False)
     return render(
         request,
@@ -37,6 +39,10 @@ def list_unpublished(request):
 
 @login_required
 def new_broadcast(request):
+    '''
+    Create a new broadcast
+    '''
+    # TODO: Add permission check or group check (Only SYSTEM_ADMIN and SYSTEM_BUSINESS groups can publish a broadcast)
     if request.method == 'POST':
         form = BroadcastCreateForm(request.POST)
         if form.is_valid():
@@ -68,6 +74,7 @@ def new_broadcast(request):
 
 
 def publish(request, broadcast_id):
+    # TODO: Add group check
     # find the broadcast from database
     broadcast = get_object_or_404(Broadcast, id=broadcast_id)
     if broadcast.is_published:
@@ -99,6 +106,7 @@ def publish(request, broadcast_id):
 
 @login_required
 def unpublish(request, broadcast_id):
+    # TODO: Add group check
     broadcast = get_object_or_404(Broadcast, id=broadcast_id)
     if not broadcast.is_published: 
         messages.error(request, "Already unpublished")

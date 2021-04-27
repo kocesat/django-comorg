@@ -8,7 +8,7 @@ User = get_user_model()
 class Broadcast(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='broadcasts')
     title = models.CharField(max_length=250)
-    body = models.TextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)  # TODO: Add rich text widget here
     created = models.DateTimeField(auto_now_add=True)
     published = models.DateTimeField(blank=True, null=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -28,3 +28,10 @@ class Broadcast(models.Model):
     def __str__(self):
         return f'{self.title} published at {self.published}'
 
+# TODO: Add Document model
+# TODO: Add Folder model (Each folder can have sub-folders)
+# TODO: Add Category model
+# Category -> Folder -> Document
+# Examples
+# FAST -> References -> System Reference Doc.
+# EFT -> WSDL & Schemas -> changes_xsd.zip
