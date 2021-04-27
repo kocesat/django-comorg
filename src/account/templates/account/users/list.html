@@ -42,7 +42,7 @@
                                                     class="form-control btn btn-sm border" 
                                                     onchange="this.form.submit()"
                                                     name="chosen_role">
-                                                  <option value="" hidden> Roles</option>
+                                                  <option value="" hidden>Assign Roles</option>
                                                   {% for role in roles %}
                                                     <option value="{{ role }}">{{ role }}</option>
                                                   {% endfor %}
@@ -54,13 +54,13 @@
                                                 class="btn btn-sm btn-warning"
                                                 type="button" data-toggle="tooltip" 
                                                 data-placement="left" title="Deactivate">
-                                                <i class="fab fa-creative-commons-zero"></i>
+                                                <i class="fab fa-creative-commons-zero"></i> Deactivate
                                             </a>
                                         {% else %}
                                             <a href="{% url 'account:activate_user' u.id %}" class="btn btn-sm btn-success"
                                                 type="button" data-toggle="tooltip" 
                                                 data-placement="top" title="Activate">
-                                                <i class="fab fa-creative-commons-sampling"></i>
+                                                <i class="fab fa-creative-commons-sampling"></i> Activate
                                             </a>
                                         {% endif %}
                                     </td>

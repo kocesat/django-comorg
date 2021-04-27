@@ -109,3 +109,11 @@ def role_assing(request, user_id: int):
     group.user_set.add(user)
     messages.success(request, 'Assigned the role successfully')
     return redirect('account:account_list')
+
+
+@login_required
+@require_POST
+def role_deny(request, user_id: int, role: str):
+    # TODO: Add group, permission check
+    # TODO: Write deny assign logic
+    pass
