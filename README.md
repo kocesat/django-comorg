@@ -11,9 +11,9 @@ This app require django version 3.1.7
 To start with:
 Clone the project and cd into 
 
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 cd into src
-python manage.py runserver
+```python manage.py runserver```
 
 create some participants and create some users associated with those participants
