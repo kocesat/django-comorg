@@ -3,7 +3,43 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
+<!-- TODO: Make Search Filter Logic -->
+<div class="container-fluid">
+    <div class=" container-fluid">
+        <a class="btn btn-primary" data-toggle="collapse" href="#filterCard" role="button" aria-expanded="false" aria-controls="filterCard">
+            <i class="fas fa-chevron-down"></i> Filter Search
+        </a>
+        <div id="filterCard" class="collapse">
+            <div class="card-shadow">
+                <div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Participant">
+                            </div>
+                            <div class="col">
+                            <input type="text" class="form-control" placeholder="Roles">
+                            </div>
+                            <div class="col">
+                            <div class="form-check form-control">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Active</label>
+                            </div>
+                            </div>
+                            <div class="col">
+                            <input type="submit" class="btn btn-info" value="Search">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
     <div class="col-md-12">
         <div class="card shadow">
             <div class="card-header bg-dark-custom">Users</div>
@@ -26,7 +62,14 @@
                                     <td>{{ u.first_name }} {{ u.last_name }}</td>
                                     <td>{{ u.participant }}</td>
                                     <td>{{ u.email }}</td>
-                                    <td>{{ u.get_group_names }}</td>
+                                    <td>
+                                        <ul class="list-group">
+                                            {% for user_role in u.get_group_names %}
+                                                <li class="list-group-item">
+                                                    {{ user_role }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
                                     <td>
                                         {% if u.is_active %} 
                                             <span class="badge badge-pill badge-success">Active</span> 
@@ -35,7 +78,7 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <form action="{% url 'account:role_assing' u.id %}" method="POST">
+                                        <!-- <form action="{% url 'account:role_assing' u.id %}" method="POST">
                                             {% csrf_token %}
                                             <div class="form-group">
                                                 <select 
@@ -48,16 +91,54 @@
                                                   {% endfor %}
                                                 </select>
                                             </div>
-                                        </form>
+                                        </form> -->
+
+                                        <button href="" class="btn btn btn-primary" type="button" data-toggle="modal"
+                                        data-target="#roleSelectModal{{ u.id }}">Roles</button>
+
+                                        <!-- Role Select Modal -->
+                                        <div class="modal fade" id="roleSelectModal{{ u.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Select Roles</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{% url 'account:role_assing' u.id %}" method="POST">
+                                                    <div class="modal-body">
+                                                        {% csrf_token %}
+                                                        <div class="form-group">
+                                                            <label for="roleSelectForm">You can select multiple roles by ctrl key</label>
+                                                            <select multiple class="form-control" name="roles_to_assign" id="roleSelectForm">
+                                                                {% for role in roles %}
+                                                                    <option 
+                                                                    {% if role in u.get_group_names %} selected {% endif %} 
+                                                                    value="{{ role }}">{{ role }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div>
+
                                         {% if u.is_active %}
                                             <a href="{% url 'account:deactivate_user' u.id %}" 
-                                                class="btn btn-sm btn-warning"
+                                                class="btn btn-warning"
                                                 type="button" data-toggle="tooltip" 
                                                 data-placement="left" title="Deactivate">
                                                 <i class="fab fa-creative-commons-zero"></i> Deactivate
                                             </a>
                                         {% else %}
-                                            <a href="{% url 'account:activate_user' u.id %}" class="btn btn-sm btn-success"
+                                            <a href="{% url 'account:activate_user' u.id %}" 
+                                                class="btn btn-success"
                                                 type="button" data-toggle="tooltip" 
                                                 data-placement="top" title="Activate">
                                                 <i class="fab fa-creative-commons-sampling"></i> Activate

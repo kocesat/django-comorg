@@ -80,5 +80,8 @@ class User(AbstractUser):
             ('can_assing_role', 'Can assing role'),
         ]
 
-    def get_group_names(self):
+    def get_group_names_as_one_line(self):
         return ', '.join(self.groups.values_list('name', flat=True))
+
+    def get_group_names(self):
+        return list(self.groups.values_list('name', flat=True))

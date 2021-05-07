@@ -95,9 +95,7 @@ def register(request):
 @require_POST
 def role_assing(request, user_id: int):
     user = get_object_or_404(User, id=user_id)
-    chosen_role = request.POST['chosen_role']
-    group = Group.objects.get(name=chosen_role)
-
+    
     if not request.user.has_perm('account.can_assing_role'):
         messages.error(request, 'Permission denied')
         return redirect('account:account_list')
@@ -105,9 +103,14 @@ def role_assing(request, user_id: int):
     if not (request.user.groups.filter(name='SYSTEM_ADMIN') or request.user.participant == user.participant):
         messages.warning(request, 'You are not not SYSTEM_ADMIN or not in the same organization as User')
         return redirect('account:account_list')
-    # if we got this far assing the role
-    group.user_set.add(user)
-    messages.success(request, 'Assigned the role successfully')
+    
+    # if we got this far assing the roles
+    roles_to_assign: list = request.POST.getlist('roles_to_assign')
+    user.groups.clear()
+    for role in roles_to_assign:
+        group = Group.objects.get(name=role)
+        group.user_set.add(user)
+    messages.success(request, 'Assigned the roles successfully')
     return redirect('account:account_list')
 
 
