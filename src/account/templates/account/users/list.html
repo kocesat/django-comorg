@@ -3,34 +3,80 @@
 {% block title %}Users{% endblock %}
 
 {% block content %}
-<!-- TODO: Make Search Filter Logic -->
-<div class="container-fluid">
-    <div class=" container-fluid">
+
+<!-- Search filter in a card -->
+<div class="container-fluid mb-3">
+    <div class="col-md-12">
+        <div class="card shadow scroll">
+            <!-- <div class="card-header bg-dark-custom"><i class="fas fa-filter"></i> Filter</div> -->
+            <div class="card-body">
+                <form method="GET">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInput">Name</label>
+                            <input type="text" name="name" class="form-control mb-2" id="inlineFormInput" placeholder="Firstname or Lastname">
+                        </div>
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Participant</label>
+                            <select class="form-control" name="participant_code" id="inlineFormInputGroup">
+                                <option value="">Participant Code</option>
+                                {% for participant in participants %}
+                                    <option value="{{ participant.code }}">{{participant.code}} - {{ participant.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" value="selected" type="checkbox" id="autoSizingCheck" name="active">
+                                <label class="form-check-label" for="autoSizingCheck">
+                                Only Active Ones
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-warning mb-2"><i class="fas fa-search"></i> Search </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<!-- search filter in a collapsible card -->
+<!-- <div class=" container-fluid">
+    <div class="col-md-12">
         <a class="btn btn-primary" data-toggle="collapse" href="#filterCard" role="button" aria-expanded="false" aria-controls="filterCard">
-            <i class="fas fa-chevron-down"></i> Filter Search
+            <i class="fas fa-filter"></i> Filter
         </a>
         <div id="filterCard" class="collapse">
             <div class="card-shadow">
                 <div class="card-body">
-                    <form>
-                        <div class="form-row">
-                            <div class="col">
-                            <input type="text" class="form-control" placeholder="Name">
+                    <form method="GET">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormInput">Name</label>
+                                <input type="text" name="name" class="form-control mb-2" id="inlineFormInput" placeholder="Firstname or Lastname">
                             </div>
-                            <div class="col">
-                            <input type="text" class="form-control" placeholder="Participant">
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormInputGroup">Participant</label>
+                                <select class="form-control" name="participant_code" id="inlineFormInputGroup">
+                                    <option value="">Participant Code</option>
+                                    {% for participant in participants %}
+                                        <option value="{{ participant.code }}">{{participant.code}} - {{ participant.name }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="col">
-                            <input type="text" class="form-control" placeholder="Roles">
+                            <div class="col-auto">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" value="selected" type="checkbox" id="autoSizingCheck" name="active">
+                                    <label class="form-check-label" for="autoSizingCheck">
+                                    Only Active Ones
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col">
-                            <div class="form-check form-control">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Active</label>
-                            </div>
-                            </div>
-                            <div class="col">
-                            <input type="submit" class="btn btn-info" value="Search">
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-warning mb-2"><i class="fas fa-search"></i> Search </button>
                             </div>
                         </div>
                     </form>
@@ -38,10 +84,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
 <div class="container-fluid">
     <div class="col-md-12">
-        <div class="card shadow">
+        <div class="card shadow scroll">
             <div class="card-header bg-dark-custom">Users</div>
             <div class="card-body">
                 <div class="table table-responsive">
@@ -78,21 +125,6 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <!-- <form action="{% url 'account:role_assing' u.id %}" method="POST">
-                                            {% csrf_token %}
-                                            <div class="form-group">
-                                                <select 
-                                                    class="form-control btn btn-sm border" 
-                                                    onchange="this.form.submit()"
-                                                    name="chosen_role">
-                                                  <option value="" hidden>Assign Roles</option>
-                                                  {% for role in roles %}
-                                                    <option value="{{ role }}">{{ role }}</option>
-                                                  {% endfor %}
-                                                </select>
-                                            </div>
-                                        </form> -->
-
                                         <button href="" class="btn btn btn-primary" type="button" data-toggle="modal"
                                         data-target="#roleSelectModal{{ u.id }}">Roles</button>
 
@@ -110,14 +142,22 @@
                                                     <div class="modal-body">
                                                         {% csrf_token %}
                                                         <div class="form-group">
-                                                            <label for="roleSelectForm">You can select multiple roles by ctrl key</label>
+                                                            <!-- <label for="roleSelectForm">You can select multiple roles by ctrl key</label>
                                                             <select multiple class="form-control" name="roles_to_assign" id="roleSelectForm">
                                                                 {% for role in roles %}
                                                                     <option 
                                                                     {% if role in u.get_group_names %} selected {% endif %} 
                                                                     value="{{ role }}">{{ role }}</option>
                                                                 {% endfor %}
-                                                            </select>
+                                                            </select> -->
+                                                            {% for role in roles %}
+                                                                <div class="form-check">
+                                                                    <input 
+                                                                        {% if role in u.get_group_names %} checked {% endif %} 
+                                                                        class="form-check-input" type="checkbox" value="{{ role }}" id="{{role}}" name="assigned_roles">
+                                                                    <label class="form-check-label" for="{{ role }}">{{ role }}</label>
+                                                                </div>
+                                                            {% endfor %}
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

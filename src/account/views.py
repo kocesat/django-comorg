@@ -7,14 +7,35 @@ from .forms import (
     UserRegistrationForm, 
     UserEditForm) 
 from django.views.decorators.http import require_POST
+from django.db.models import Q
 
 
 def account_list(request):
+    # search strings
+    participant_code = request.GET.get('participant_code')
+    name = request.GET.get('name')
+    active = request.GET.get('active')
+
     users = User.objects.select_related('participant').all()
     roles = Group.objects.values_list('name', flat=True)
+    participants = Participant.objects.all()
+
+    if participant_code:
+        participant = get_object_or_404(Participant, code=participant_code)
+        users = users.filter(participant=participant)
+
+    if active == 'selected':
+        users = users.filter(is_active=True)
+
+    if name:
+        users = users.filter(
+            Q(first_name__icontains=name) | Q(last_name__icontains=name)
+        )
+
     return render(request, 'account/users/list.html', {
         'users': users,
         'roles': roles,
+        'participants': participants
     })
 
 
@@ -28,6 +49,7 @@ def participant_list(request):
             'participants': participants
         }
     )
+
 
 @login_required
 # @permission_required('account.can_activate_user', raise_exception=True)
@@ -105,7 +127,7 @@ def role_assing(request, user_id: int):
         return redirect('account:account_list')
     
     # if we got this far assing the roles
-    roles_to_assign: list = request.POST.getlist('roles_to_assign')
+    roles_to_assign: list = request.POST.getlist('assigned_roles')
     user.groups.clear()
     for role in roles_to_assign:
         group = Group.objects.get(name=role)
