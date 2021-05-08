@@ -7,9 +7,9 @@ Participants can manage their staff who need to access to all kind of resources 
 This app implements a CustomUser model extended by AbstractUser model provided by Django. UI is created by sb admin bootstrap
 
 ![Screenshot](pictures/users.png)
-![Screenshot](pictures/role_selection.png)
+![Screenshot](pictures/role_selection.PNG)
 ![Screenshot](pictures/broadcast.png)
-![Screenshot](pictures/make_broadcast.png)
+![Screenshot](pictures/make_broadcast.PNG)
 
 This app require django version 3.1.7
 
