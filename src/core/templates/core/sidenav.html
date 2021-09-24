@@ -14,7 +14,6 @@
                         <a href="{% url 'account:participant_list' %}" class="nav-link">Participants</a>
                     </nav>
                 </div>
-
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#broadcast-menu" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Broadcasts
@@ -27,7 +26,6 @@
                         <a href="{% url 'communication:list_unpublished' %}" class="nav-link">Unpublished</a>
                     </nav>
                 </div>
-
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#documentation" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Documentation
@@ -35,8 +33,7 @@
                 </a>
                 <div class="collapse" id="documentation" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="#">Topic A</a>
-                        <a href="#" class="nav-link">Topic B</a>
+                        <a class="nav-link" href="{% url 'document:index' %}">Documents</a>
                     </nav>
                 </div>
             </div>

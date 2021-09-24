@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig', # new
     'crispy_forms',
     'communication.apps.CommunicationConfig', # new
+    'document.apps.DocumentConfig', # new
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

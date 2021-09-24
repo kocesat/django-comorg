@@ -28,10 +28,4 @@ class Broadcast(models.Model):
     def __str__(self):
         return f'{self.title} published at {self.published}'
 
-# TODO: Add Document model
-# TODO: Add Folder model (Each folder can have sub-folders)
-# TODO: Add Category model
-# Category -> Folder -> Document
-# Examples
-# FAST -> References -> System Reference Doc.
-# EFT -> WSDL & Schemas -> changes_xsd.zip
+
