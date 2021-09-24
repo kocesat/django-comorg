@@ -4,10 +4,42 @@
 
 {% block content %}
 <div class="container-fluid">
-    {% for folder in folders %}
-        <div class="my-2">
-            <button class="btn btn-primary">{{folder.name}}</button>
+    <div class="card border-light shadow mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <!-- add breadcrumb here -->
+            <div>
+                <a class="btn btn-outline-info" href="#"><i class="fas fa-arrow-left"></i></a>
+                <a class="btn btn-secondary" href="{% url 'document:index' %}">Categories</a>
+            </div>
+            <div>
+                <a class="btn btn-sm btn-outline-info" href=""><i class="fas fa-plus"></i> New </a>
+                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+            </div>
         </div>
-    {% endfor %}
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Creation Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for folder in folders %}
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary"><span><i class="fas fa-folder"></i></span>
+                                <a href="{% url 'document:folder_list' category_id=category.id %}">{{ folder.name }}</a>
+                            </button>
+                        </td>
+                        <td>{{ folder.created }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

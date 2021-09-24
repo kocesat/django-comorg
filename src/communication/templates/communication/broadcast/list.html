@@ -6,13 +6,17 @@
 <div class="container-fluid">
     {% for broadcast in broadcasts %}
         <div class="card border-light shadow mb-4">
-            <div class="card-header">
-                <strong>{{ broadcast.title }}</strong>
-                {% if perms.communication.change_broadcast %} 
-                <a href="{% url 'communication:unpublish' broadcast.id %}" class="btn btn-sm btn-warning ml-2">Unpublish</a>
-                <a href="#" class="btn btn-sm btn-info">Edit</a>
-                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                {% endif %}
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ broadcast.title }}</strong>
+                </div>
+                <div>
+                    {% if perms.communication.change_broadcast %} 
+                        <a href="{% url 'communication:unpublish' broadcast.id %}" class="btn btn-sm btn-warning ml-2">Unpublish</a>
+                        <a href="#" class="btn btn-sm btn-info">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </div>
             </div>
             <div class="card-body">
                 <div class="card-text">
