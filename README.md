@@ -10,6 +10,8 @@ This app implements a CustomUser model extended by AbstractUser model provided b
 ![Screenshot](pictures/role_selection.PNG)
 ![Screenshot](pictures/broadcast.png)
 ![Screenshot](pictures/make_broadcast.PNG)
+![Screenshot](pictures/categories_list.PNG)
+![Screenshot](pictures/folder_list.PNG)
 
 This app require django version 3.1.7
 
