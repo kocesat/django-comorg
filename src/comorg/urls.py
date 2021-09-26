@@ -18,6 +18,7 @@ from django.urls import path, include
 from core import views
 
 urlpatterns = [
+    path('', views.home, name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('account.urls', namespace='account') ),
     path('communications/', include('communication.urls', namespace='communication')),

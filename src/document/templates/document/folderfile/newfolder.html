@@ -8,7 +8,7 @@
     <div class="container">
         <div class="card border-light shadow">
             <div class="card-header bg-dark-custom">
-                Create a new category
+                Create a new folder
             </div>
             <div class="card-body">
                 <form method="POST">
@@ -16,7 +16,7 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                     </div>
-                    <a class="btn btn-outline-info" href="{% url 'document:index' %}"><i class="fas fa-arrow-left"></i></a>
+                    <a class="btn btn-outline-info" href="javascript:history.go(-1)"><i class="fas fa-arrow-left"></i></a>
                     <input type="submit" class="btn btn-primary" value="Save">
                 </form>
             </div>

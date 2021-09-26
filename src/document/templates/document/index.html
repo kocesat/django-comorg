@@ -9,7 +9,7 @@
     <div class="card border-light shadow mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4>Categories</h4>
-            <a class="btn btn-outline-info" href="{% url 'document:category_new' %}"><i class="fas fa-plus"></i> Add Category</a>
+            <a class="btn btn-outline-info" href="{% url 'document:category_new' %}"><i class="fas fa-plus"></i> New Category</a>
         </div>
         <div class="card-body">
             <table class="table table-hover">
@@ -24,7 +24,7 @@
                     <tr>
                         <td>
                             <button type="button" class="btn btn-outline-primary"><span><i class="fas fa-folder"></i></span>
-                                <a href="{% url 'document:folder_list' category_id=category.id %}">{{ category.name }}</a>
+                                <a href="{% url 'document:document_list' category_id=category.id %}">{{ category.name }}</a>
                             </button>
                         </td>
                         <td>{{ category.created }}</td>
