@@ -150,3 +150,6 @@ EMAIL_HOST_PASSWORD = 'Ankara06.'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+MEDIA_ROOT = BASE_DIR / 'core/media/'
+MEDIA_URL = '/media/'

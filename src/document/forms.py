@@ -1,14 +1,16 @@
 from django import forms
-from .models import Category, Folder
+from .models import Folder, File
 
-class CategoryCreateForm(forms.ModelForm):
-    
-    class Meta:
-        model = Category
-        fields = ['name']
 
 class FolderCreateForm(forms.ModelForm):
     
     class Meta:
         model = Folder
         fields = ['name']
+
+
+class FileUploadForm(forms.ModelForm):
+    
+    class Meta:
+        model = File
+        fields = ['name', 'description', 'is_draft', 'file']

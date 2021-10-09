@@ -26,16 +26,14 @@
                         <a href="{% url 'communication:list_unpublished' %}" class="nav-link">Unpublished</a>
                     </nav>
                 </div>
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#documentation" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Documentation
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                <a class="nav-link" href="#">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Documents
                 </a>
-                <div class="collapse" id="documentation" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{% url 'document:index' %}">Categories</a>
-                    </nav>
-                </div>
+                <a class="nav-link" href="{% url 'document:document_list' %}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Document Management
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">

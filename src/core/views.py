@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from document.models import Category
+from django.http import HttpResponse
 
-def home(request):
-    categories = Category.objects.all()
-    return render(request, 'core/base.html', {'categories': categories})
+
+def index(request):
+    return render(request, 'core/index.html')
