@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Folder{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card border-light shadow">
+            <div class="card-header bg-dark-custom">
+                Edit folder
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="fieldset">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                    </div>
+                    <a class="btn btn-outline-info" href="javascript:history.go(-1)"><i class="fas fa-arrow-left"></i></a>
+                    <input type="submit" class="btn btn-primary" value="Save Changes">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
